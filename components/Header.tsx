@@ -13,18 +13,28 @@ const Header = () => {
   useEffect(() => {
     //   Fn. checks if user scrolled
     const handleScroll = () => {
-        // check if window was scrolled
-        if(window.scrollY > 0) {
-            setIsScrolled(true)
-        }else{
-            setIsScrolled(false)
-        }
+      // check if window was scrolled
+      if (window.scrollY > 0) {
+        setIsScrolled(true)
+      } else {
+        setIsScrolled(false)
+      }
     }
+    
+    
+    // listen if user is scrolling
+    window.addEventListener('scroll', handleScroll)
+    // cleanup Fn.
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+    //! empty dependency array means, it will run just when the Header component is mounting, not sure about this...
   }, [])
 
   // *========== HTML ==========
   return (
-    <header>
+    // header will appear black if user scrolls down
+    <header className={`${isScrolled && 'bg-[#141414]'}`}>
       {/* tailwind is mobil first, so we need to write "md:" to reflect desktop view */}
       {/* space: Control the horizontal space between elements */}
       <div className="flex items-center space-x-2 md:space-x-10">
