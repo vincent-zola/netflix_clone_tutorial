@@ -34,7 +34,7 @@ const Header = () => {
   // *========== HTML ==========
   return (
     // header will appear black if user scrolls down
-    <header className={`${isScrolled && 'bg-[#141414]'}`}>
+    <header className={`${isScrolled ? 'bg-[#141414]': "bg-[#141414d8]"}`}>
       {/* tailwind is mobil first, so we need to write "md:" to reflect desktop view */}
       {/* space: Control the horizontal space between elements */}
       <div className="flex items-center space-x-2 md:space-x-10">
