@@ -31,8 +31,8 @@ const Banner = ({ netflixOriginals }: Props) => {
   return (
     //   ! text on lg screen needs adjustments, when the length gets smaller
     // removed: lg:h-[65vh]
-    // added: lg:pt-72
-    <div className="flex flex-col space-y-2 py-16 md:space-y-4  lg:justify-end lg:pb-12 lg:pt-72 ">
+    // added: lg:pt-72 customLg:pt-16
+    <div className="flex flex-col space-y-2 py-16 md:space-y-4  lg:justify-end lg:pb-12 lg:pt-72 customLg:pt-16">
       {/* height and width must be provided to the parent of img for the img to load */}
       {/* absolute and z index so that the img is behind the text and on top of the page */}
       <div className="absolute top-0 left-0 -z-10 h-[95vh] w-screen">
