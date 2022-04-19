@@ -1,0 +1,1 @@
+!getApps().length ? initializeApp(firebaseConfig) : getApp()
