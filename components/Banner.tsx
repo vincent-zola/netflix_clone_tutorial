@@ -27,7 +27,7 @@ const Banner = ({ netflixOriginals }: Props) => {
     )
   }, [netflixOriginals])
 
-  console.log(movie)
+  
 
   // * ========== HTML ==========
   return (

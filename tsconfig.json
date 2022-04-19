@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    // to which version of js we want ts to compile our code
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,

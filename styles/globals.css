@@ -3,14 +3,15 @@
 @tailwind utilities;
 
 /** base: html, body, heading, h1 and so on */
-@layer base{
-    body{
-        @apply bg-[#141414] text-white;
-    }
-    header{
-        /* fixed: stays always on top, ("0") pixels from top */
-        @apply fixed top-0 z-50 flex w-full items-center justify-between px-4 py-4 transition-all lg:px-10 lg:py-6;
-    }
+@layer base {
+  body {
+    /* scrollbar properties are from the tailwind-scrollbar library */
+    @apply bg-[#141414] text-white !scrollbar-thin !scrollbar-track-transparent !scrollbar-thumb-red-600;
+  }
+  header {
+    /* fixed: stays always on top, ("0") pixels from top */
+    @apply fixed top-0 z-50 flex w-full items-center justify-between px-4 py-4 transition-all lg:px-10 lg:py-6;
+  }
 }
 
 /** components: custom classes */
@@ -21,7 +22,7 @@
     /* text-[] brackets let us specify color by ourselves*/
     @apply cursor-pointer text-sm font-light text-[#e5e5e5] transition duration-[.4s] hover:text-[#b3b3b3];
   }
-  .bannerButton{
-    @apply flex items-center gap-x-2 rounded px-5 py-1.5 text-sm font-semibold transition hover:opacity-75 md:py-2.5 md:px-8 md:text-xl
+  .bannerButton {
+    @apply flex items-center gap-x-2 rounded px-5 py-1.5 text-sm font-semibold transition hover:opacity-75 md:py-2.5 md:px-8 md:text-xl;
   }
 }
