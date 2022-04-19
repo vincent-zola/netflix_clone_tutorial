@@ -41,7 +41,7 @@ const Home = ({
     <div className="relative h-screen bg-gradient-to-b  lg:h-[140vh]">
       <Head>
         <title>Home - Netflix</title>
-        <link rel="icon" href="./netflix_thumbnail.ico" />
+        <link rel="icon" href="/netflix_thumbnail.ico" />
       </Head>
       <Header />
       <main className="relative pl-4 pb-24 lg:space-y-24 lg:pl-16">
