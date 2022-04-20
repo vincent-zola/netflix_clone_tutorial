@@ -28,6 +28,7 @@ const Modal = () => {
       const data = await fetch(
         `https://api.themoviedb.org/3/${
           // check if movie has a tv or movie attribute, append to url
+          // besides trending all other have a "movie" attribute
           movie?.media_type === 'tv' ? 'tv' : 'movie'
         }/${movie?.id}?api_key=${
           process.env.NEXT_PUBLIC_API_KEY
