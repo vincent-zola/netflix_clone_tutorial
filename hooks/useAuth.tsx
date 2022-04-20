@@ -60,11 +60,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     () =>
       onAuthStateChanged(auth, (user) => {
         if (user) {
-          // Logged in...
+          // Logged in... nothing happens and we can navigate to any link
           setUser(user)
           setLoading(false)
         } else {
-          // Not logged in...
+          // Not logged in... pushes us to login page
           setUser(null)
           setLoading(true)
           router.push('/login')
