@@ -12,9 +12,10 @@ import { InformationCircleIcon } from '@heroicons/react/solid'
 interface Props {
   netflixOriginals: Movie[]
 }
+// *========== Variables & Functions ==========
 
 const Banner = ({ netflixOriginals }: Props) => {
-  // *========== Variables & Functions ==========
+  
 
   // stores the random Movie selected in useEffect
   // <Movie | null> TS type either Movie or null
