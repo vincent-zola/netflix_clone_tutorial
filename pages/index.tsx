@@ -1,8 +1,11 @@
 // * ========== Imports ==========
 
 import Head from 'next/head'
+import { useRecoilValue } from 'recoil'
+import { modalState } from '../atoms/modalAtom'
 import Banner from '../components/Banner'
 import Header from '../components/Header'
+import Modal from '../components/Modal'
 import Row from '../components/Row'
 import useAuth from '../hooks/useAuth'
 import { Movie } from '../typings'
@@ -37,7 +40,12 @@ const Home = ({
   trendingNow,
 }: Props) => {
   // use useAuth to import the State from useAuth component and extract the values
-  const { logout, loading } = useAuth()
+  const { loading } = useAuth()
+  // comes from the library recoil
+  // modalState declared in modalAtom.ts
+  // if true will display Modal component
+  // uesRecoilValue returns just a value
+  const showModal = useRecoilValue(modalState)
   // ! I suppose we need to add a loading screen, lol
   if (loading) return null
 
@@ -65,7 +73,7 @@ const Home = ({
           <Row title="Documentaries" movies={documentaries} />
         </section>
       </main>
-      {/* Modal */}
+      {showModal && <Modal/>}
     </div>
   )
 }

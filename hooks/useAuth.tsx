@@ -145,7 +145,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }),
     [user, loading, error]
   )
-
   // Basically returns our State to all of the children, all children will receive it because we wrapped our app in _app.tsx with this component
   return (
     // "!initialLoading &&" if is false show UI else block the whole UI but basically it redirects us to login as I understand...
@@ -154,6 +153,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     </AuthContext.Provider>
   )
 }
+
+
 
 // ? I think this can be written shorter
 export default function useAuth() {
