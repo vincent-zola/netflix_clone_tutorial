@@ -16,8 +16,8 @@ interface Inputs {
 // *========== Variables & Functions ==========
 
 const Login = () => {
-   // use useAuth to import the State from useAuth component and extract the values
-  const {signIn,signUp } = useAuth()
+  // use useAuth to import the State from useAuth component and extract the values
+  const { signIn, signUp } = useAuth()
   //check if log in or sign up button was pressed
   const [login, setLogin] = useState(false)
   // these form variables are from the library: react-hook-form, which let us validate the input from the user before the submit happened
@@ -32,12 +32,12 @@ const Login = () => {
   // onSubmit Fn. checks our Email and Password and is used in form element
   // we getting email and password because we invoked register in our input
   // : SubmitHandler<Inputs> is the type of onSubmit
-  const onSubmit: SubmitHandler<Inputs> = async ({email, password}) => {
+  const onSubmit: SubmitHandler<Inputs> = async ({ email, password }) => {
     // check if user clicked on the Sign In button
     if (login) {
       // setLogin(true)
       await signIn(email, password)
-    }else{
+    } else {
       // setLogin(false)
       await signUp(email, password)
     }
@@ -108,7 +108,7 @@ const Login = () => {
               className="input"
               {...register('password', { required: true })}
             />
-            {/*//! This needs work because it lets us submit with less than 4 characters */}
+
             {errors.password && (
               <p className="p-1 text-[13px] font-light  text-orange-500">
                 Your password must contain between 4 and 60 characters.

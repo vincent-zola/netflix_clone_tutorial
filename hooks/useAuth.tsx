@@ -43,7 +43,7 @@ const AuthContext = createContext<IAuth>({
 
 // this Fn. is a wrapper which will wrap our entire app, children are all components in our App
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  //!...
+  // state to enable loading-screen in index.tsx
   const [loading, setLoading] = useState(false)
   // block the UI
   const [initialLoading, setInitialLoading] = useState(true)
