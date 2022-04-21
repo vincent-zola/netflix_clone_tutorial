@@ -101,7 +101,7 @@ const Modal = () => {
               url={
                 `https://www.youtube.com/watch?v=${trailer} ||
                   
-                https://www.youtube.com/watch?v=yqWX86uT5jM&ab`
+                https://www.youtube.com/watch?v=2kMi6MfmGM8&ab`
               }
               width="100%"
               height="100%"
