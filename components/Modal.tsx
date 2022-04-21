@@ -70,9 +70,6 @@ const Modal = () => {
     fetchMovie()
   }, [movie])
 
-  console.log(genres)
-  console.log(trailer)
-
   // * ========== HTML ==========
   return (
     //   open: just when showModal is true
@@ -97,13 +94,15 @@ const Modal = () => {
           {/* ReactPlayer comes from the react-player library*/}
           <ReactPlayer
             // insert fetched video code to YT url
-            url={`https://www.youtube.com/watch?v=${trailer}`}
+            // if no video play placeholder
+            url={`https://www.youtube.com/watch?v=${trailer} || https://www.youtube.com/watch?v=yqWX86uT5jM&ab`}
             width="100%"
             height="100%"
             // the following styling is react-player specific, see npm docs
             style={{ position: 'absolute', top: '0', left: '0' }}
             playing
             muted={muted}
+            // controls
           />
           {/* // * ===== Buttons ===== */}
           <div className="absolute bottom-10 flex w-full items-center justify-between px-10 ">
@@ -120,13 +119,48 @@ const Modal = () => {
                 <ThumbUpIcon className="h-7 w-7" />
               </button>
             </div>
-            <button className="modalButton" onClick={()=> setMuted(!muted)} >
+            <button className="modalButton" onClick={() => setMuted(!muted)}>
               {muted ? (
                 <VolumeOffIcon className="h-6 w-6" />
               ) : (
                 <VolumeUpIcon className="h-6 w-6" />
               )}
             </button>
+          </div>
+        </div>
+        {/* // * ===== Movie Info ===== */}
+        <div className="flex space-x-16 rounded-b-md bg-[#181818] px-10 py-8">
+          <div className="space-y-6 text-lg">
+            <div className="flex items-center space-x-2 text-sm">
+              {/* In TypeScript, a postfix ! removes null and undefined from the type of an expression. This is useful when you know, for reasons outside TypeScript's inference ability, that a variable that "could" be null or undefined actually isn't.*/}
+              <p className="font-semibold text-green-400">
+                {movie!.vote_average * 10} % Match
+              </p>
+              <p className="font-light">
+                {movie?.release_date || movie?.first_air_date}
+              </p>
+              <div className="flex h-4 items-center justify-center rounded border border-white/40 px-1.5 text-xs">
+                HD
+              </div>
+            </div>
+            <div className="flex flex-col gap-x-10 gap-y-4 font-light md:flex-row">
+              <p className="w-5/6">{movie?.overview}</p>
+              <div className="flex flex-col space-y-3 text-sm">
+                <div>
+                  <span className="text-[gray]">Genres: </span>
+                  {/* .join: Adds all the elements of an array into a string, separated by the specified separator string. */}
+                  {genres.map((genre) => genre.name).join(', ')}
+                </div>
+                <div>
+                  <span className="text-[gray]">Original language: </span>
+                  {movie?.original_language}
+                </div>
+                <div>
+                  <span className="text-[gray]">Total votes: </span>
+                  {movie?.vote_count}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </>

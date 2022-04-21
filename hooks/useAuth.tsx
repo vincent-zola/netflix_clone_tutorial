@@ -59,7 +59,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   useEffect(
     () =>
       onAuthStateChanged(auth, (user) => {
-        if (user) {
+        if (user) {          
           // Logged in... nothing happens and we can navigate to any link
           setUser(user)
           setLoading(false)
@@ -74,6 +74,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       }),
     [auth]
   )
+
 
   // * ===== Sign Up Fn. =====
   // Fn. to sign up new user with email and password
