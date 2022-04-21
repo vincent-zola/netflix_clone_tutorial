@@ -95,6 +95,7 @@ const Modal = () => {
           <ReactPlayer
             // insert fetched video code to YT url
             // if no video play placeholder
+            // ! fallback loads before data is fetched
             url={`https://www.youtube.com/watch?v=${trailer} || https://www.youtube.com/watch?v=2kMi6MfmGM8&ab`}
             width="100%"
             height="100%"

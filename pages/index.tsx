@@ -53,7 +53,8 @@ const Home = ({
   return (
     // relative: because the Header is "fixed"
     // bg-gradient-to-b is custom defined at tailwind.config.js
-    <div className="relative h-screen bg-gradient-to-b  lg:h-[140vh]">
+    // if showModal is true, than h is 100vh and user can not scroll anymore
+    <div className={`relative h-screen bg-gradient-to-b  lg:h-[140vh] ${showModal && '!h-screen overflow-hidden'}`}>
       <Head>
         <title>Home - Netflix</title>
         <link rel="icon" href="./netflix_thumbnail.ico" />
