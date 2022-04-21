@@ -95,13 +95,14 @@ const Modal = () => {
           <ReactPlayer
             // insert fetched video code to YT url
             // if no video play placeholder
-            url={`https://www.youtube.com/watch?v=${trailer} || https://www.youtube.com/watch?v=yqWX86uT5jM&ab`}
+            url={`https://www.youtube.com/watch?v=${trailer} || https://www.youtube.com/watch?v=2kMi6MfmGM8&ab`}
             width="100%"
             height="100%"
             // the following styling is react-player specific, see npm docs
             style={{ position: 'absolute', top: '0', left: '0' }}
             playing
             muted={muted}
+            loop
             // controls
           />
           {/* // * ===== Buttons ===== */}
