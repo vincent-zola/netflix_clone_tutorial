@@ -1,10 +1,20 @@
 // * ========== Imports ==========
-import { XIcon } from '@heroicons/react/outline'
+import {
+  PlusIcon,
+  ThumbUpIcon,
+  VolumeOffIcon,
+  VolumeUpIcon,
+  XIcon,
+} from '@heroicons/react/outline'
 import MuiModal from '@mui/material/Modal'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { FaPlay } from 'react-icons/fa'
+// add lazy at the end for lazy-load
+import ReactPlayer from 'react-player/lazy'
 import { useRecoilState } from 'recoil'
 import { modalState, movieState } from '../atoms/modalAtom'
-import { Movie } from '../typings'
+import { Genre, Movie } from '../typings'
+import { Element } from '../typings'
 // *========== Variables & Functions ==========
 const Modal = () => {
   // comes from the library recoil
@@ -14,6 +24,12 @@ const Modal = () => {
   const [showModal, setShowModal] = useRecoilState(modalState)
   // stores the random Movie selected in Banner.tsx
   const [movie, setMovie] = useRecoilState(movieState)
+  // will contain key from fetched video, which is part of an url from YT
+  const [trailer, setTrailer] = useState('')
+  // will contain array of genres of our fetched video, obj: Id and name
+  const [genres, setGenres] = useState<Genre[]>([])
+  // state for muting the player
+  const [muted, setMuted] = useState<boolean>(true)
 
   // * ===== Close Modal Fn. =====
   const handleClose = () => {
@@ -34,18 +50,38 @@ const Modal = () => {
           process.env.NEXT_PUBLIC_API_KEY
           // this gives us back the videos
         }&language=en-US&append_to_response=videos`
-      ).then((response) => response.json())
-      console.log(data)
-      
+      )
+        .then((response) => response.json())
+        .catch((error) => console.log(error))
+
+      if (data?.videos) {
+        // find the index of video with the "Trailer" attribute
+        const index = data.videos.results.findIndex(
+          (element: Element) => element.type === 'Trailer'
+        )
+        // assign key property from fetched data to trailer
+        setTrailer(data.videos?.results[index]?.key)
+      }
+      // assign genres property from fetched data to genres
+      if (data?.genres) {
+        setGenres(data.genres)
+      }
     }
     fetchMovie()
   }, [movie])
- 
-  
+
+  console.log(genres)
+  console.log(trailer)
+
   // * ========== HTML ==========
   return (
     //   open: just when showModal is true
-    <MuiModal open={showModal} onClose={handleClose}>
+    // "!": to override MU styles
+    <MuiModal
+      open={showModal}
+      onClose={handleClose}
+      className="fixed !top-7 left-0 z-50 mx-auto w-full max-w-5xl overflow-hidden overflow-y-scroll rounded-md scrollbar-hide"
+    >
       <>
         {/* // * ===== Close Button ===== */}
         {/* modalButton custom className in globals.css */}
@@ -55,7 +91,44 @@ const Modal = () => {
         >
           <XIcon className="h-6 w-6 " />
         </button>
-        <div></div>
+        {/* // * ===== Player ===== */}
+        {/* the following styling is react-player specific, see npm docs */}
+        <div className="relative pt-[56.25%]">
+          {/* ReactPlayer comes from the react-player library*/}
+          <ReactPlayer
+            // insert fetched video code to YT url
+            url={`https://www.youtube.com/watch?v=${trailer}`}
+            width="100%"
+            height="100%"
+            // the following styling is react-player specific, see npm docs
+            style={{ position: 'absolute', top: '0', left: '0' }}
+            playing
+            muted={muted}
+          />
+          {/* // * ===== Buttons ===== */}
+          <div className="absolute bottom-10 flex w-full items-center justify-between px-10 ">
+            <div className="flex space-x-2">
+              <button className="flex items-center gap-x-2 rounded bg-white px-8 text-xl font-bold text-black transition hover:bg-[#e6e6e6]">
+                <FaPlay className="h-7 w-7 text-black " />
+                Play
+              </button>
+              {/* modalButton custom class in global.css */}
+              <button className="modalButton">
+                <PlusIcon className="h-7 w-7" />
+              </button>
+              <button className="modalButton">
+                <ThumbUpIcon className="h-7 w-7" />
+              </button>
+            </div>
+            <button className="modalButton" onClick={()=> setMuted(!muted)} >
+              {muted ? (
+                <VolumeOffIcon className="h-6 w-6" />
+              ) : (
+                <VolumeUpIcon className="h-6 w-6" />
+              )}
+            </button>
+          </div>
+        </div>
       </>
     </MuiModal>
   )
